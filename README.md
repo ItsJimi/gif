@@ -1,9 +1,7 @@
 # gif-cli
 🏞 The simplest way to create gif
 
-```
 This tool use [github.com/ItsJimi/gif](https://github.com/ItsJimi/gif), my own library to create gif.
-```
 
 ## Install
 ```shell
