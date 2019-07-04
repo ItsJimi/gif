@@ -1,22 +1,28 @@
-# gif-cli
-🏞 The simplest way to create gif
+# gif
+🏞 The simplest way to create gif from video
 
-This tool use [github.com/ItsJimi/gif](https://github.com/ItsJimi/gif), my own library to create gif.
+This tool use [ffmpeg](https://ffmpeg.org/) as dependency.
 
 ## Install
+Use precompiled versions in [releases page](https://github.com/ItsJimi/gif/releases)
+
+or
+
 ```shell
-go get -u github.com/itsjimi/gif-cli
+go get -u github.com/itsjimi/gif
 ```
 
 ## Usage
-The current extensions supported are `.jpg`, `.jpeg`, `.png`, `.gif`.
 ```shell
-gif image1.jpg image2.png image3.gif
+gif help
 ```
-The `gif` command will create `out.gif` file with your creation.
+### Convert
+```shell
+gif convert --help
+```
 
 ## Contribute
 Feel free to fork and make pull requests
 
 ## License
-[MIT](https://github.com/ItsJimi/gif-cli/blob/master/LICENSE)
+[MIT](https://github.com/ItsJimi/gif/blob/master/LICENSE)
