@@ -24,13 +24,16 @@ func convertFiles(files []os.FileInfo, inputPath string, outputPath string, opt 
 
 	for _, file := range files {
 		fmt.Println("Converting " + file.Name() + " to " + file.Name() + ".gif")
-		ffmpeg := exec.Command("ffmpeg", "-i", inputPath+"/"+file.Name(), "-vf", "fps="+strconv.Itoa(opt.FPS)+",scale="+strconv.Itoa(opt.Scale)+":-1:flags=lanczos,palettegen", "-y", outputPath+"/palette.png")
+		ffmpeg := exec.Command("ffmpeg", "-i", inputPath+"/"+file.Name(), "-vf", "fps="+strconv.Itoa(opt.FPS)+",scale="+strconv.Itoa(opt.Scale)+":-1:flags=lanczos,palettegen", "-y", outputPath+"/"+file.Name()+".png")
 		if err := ffmpeg.Run(); err != nil {
 			return err
 		}
-		ffmpeg = exec.Command("ffmpeg", "-i", inputPath+"/"+file.Name(), "-i", outputPath+"/palette.png", "-filter_complex", "fps="+strconv.Itoa(opt.FPS)+",scale="+strconv.Itoa(opt.Scale)+":-1:flags=lanczos[x];[x][1:v]paletteuse"+cropFlag+opt.Crop, "-y", outputPath+"/"+file.Name()+".gif")
+		ffmpeg = exec.Command("ffmpeg", "-i", inputPath+"/"+file.Name(), "-i", outputPath+"/"+file.Name()+".png", "-filter_complex", "fps="+strconv.Itoa(opt.FPS)+",scale="+strconv.Itoa(opt.Scale)+":-1:flags=lanczos[x];[x][1:v]paletteuse"+cropFlag+opt.Crop, "-y", outputPath+"/"+file.Name()+".gif")
 		if err := ffmpeg.Run(); err != nil {
 			return err
+		}
+		if err := os.Remove(inputPath + "/" + file.Name() + ".png"); err != nil {
+			fmt.Println(err)
 		}
 	}
 	return nil
@@ -41,7 +44,7 @@ func FromFolder(inputPath string, outputPath string, opt Options) {
 	var files []os.FileInfo
 
 	err := filepath.Walk(inputPath, func(path string, info os.FileInfo, err error) error {
-		if strings.ToLower(filepath.Ext(path)) != ".mov" {
+		if info.IsDir() == true || strings.ToLower(filepath.Ext(path)) == ".gif" {
 			return nil
 		}
 		files = append(files, info)
@@ -53,10 +56,6 @@ func FromFolder(inputPath string, outputPath string, opt Options) {
 
 	fmt.Println(inputPath + " -> " + outputPath)
 	if err := convertFiles(files, inputPath, outputPath, opt); err != nil {
-		fmt.Println(err)
-	}
-
-	if err := os.Remove(inputPath + "/palette.png"); err != nil {
 		fmt.Println(err)
 	}
 }

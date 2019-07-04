@@ -16,10 +16,12 @@ func init() {
 }
 
 var convertCmd = &cobra.Command{
-	Use:     "convert",
-	Short:   "Convert videos to animated gif",
-	Long:    "Convert videos to animated gif.",
-	Example: `  gif convert my-video.mp4 my-gif.gif`,
+	Use:   "convert",
+	Short: "Convert videos to animated gif",
+	Long:  "Convert videos to animated gif.",
+	Example: `  gif convert my-video.mp4 my-gif.gif
+  gif convert my-video.mp4 my-gif.gif --fps 60 --scale 1280
+  gif convert ./folder ./another-folder --crop "1280:720:30:60"`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) == 0 {
 			fmt.Println("Invalid arguments, type `gif convert -h` to see arguments available.")
