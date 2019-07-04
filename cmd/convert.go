@@ -9,7 +9,9 @@ import (
 )
 
 func init() {
-	convertCmd.Flags().StringVarP(&crop, "crop", "c", "", "Crop videos before conversion")
+	convertCmd.Flags().IntVarP(&fps, "fps", "f", 30, "gif convert my-video.mp4 my-gif.gif --fps 30")
+	convertCmd.Flags().IntVarP(&scale, "scale", "s", -1, "gif convert my-video.mp4 my-gif.gif --scale -1")
+	convertCmd.Flags().StringVarP(&crop, "crop", "c", "", "gif convert my-video.mp4 my-gif.gif --crop \"width:height:left:top\"")
 	rootCmd.AddCommand(convertCmd)
 }
 
@@ -42,7 +44,11 @@ var convertCmd = &cobra.Command{
 				return
 			}
 
-			convert.FromFolder(inputPath.Name(), outputPath.Name())
+			convert.FromFolder(inputPath.Name(), outputPath.Name(), convert.Options{
+				FPS:   fps,
+				Scale: scale,
+				Crop:  crop,
+			})
 			return
 		}
 
@@ -53,4 +59,6 @@ var convertCmd = &cobra.Command{
 	},
 }
 
+var fps int
+var scale int
 var crop string
