@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/ItsJimi/gif-cli/cmd"
+	"github.com/ItsJimi/gif/cmd"
 )
 
 func main() {

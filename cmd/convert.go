@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ItsJimi/gif-cli/pkg/convert"
+	"github.com/ItsJimi/gif/pkg/convert"
 	"github.com/spf13/cobra"
 )
 
