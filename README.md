@@ -1,9 +1,9 @@
 # gif
 🏞 The simplest way to create gif from video
 
-This tool use [ffmpeg](https://ffmpeg.org/) as dependency.
-
 ## Install
+Install [ffmpeg](https://ffmpeg.org/) before running `gif`.
+
 Use precompiled versions in [releases page](https://github.com/ItsJimi/gif/releases)
 
 or
