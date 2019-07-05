@@ -32,7 +32,10 @@ gif convert ./folder ./another-folder --crop "1280:720:30:60"
 ```go
 package main
 
-import "github.com/ItsJimi/gif/pkg/convert"
+import (
+  "fmt"
+  "github.com/ItsJimi/gif/pkg/convert"
+)
 
 func main() {
   options := convert.Options{
@@ -41,7 +44,10 @@ func main() {
     Crop:  "",
   }
 
-  convert.FromFolder("./videos", "./gifs", options)
+  err := convert.FromFolder("./videos", "./gifs", options)
+  if err != nil {
+    fmt.Println(err)
+  }
 }
 ```
 
