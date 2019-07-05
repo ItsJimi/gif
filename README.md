@@ -23,6 +23,9 @@ gif help
 #### Convert
 ```shell
 gif convert --help
+gif convert my-video.mp4 my-gif.gif
+gif convert my-video.mp4 my-gif.gif --fps 60 --scale 1280
+gif convert ./folder ./another-folder --crop "1280:720:30:60"
 ```
 ### Code
 #### Convert from folder
