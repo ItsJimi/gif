@@ -11,9 +11,10 @@ import (
 
 // Options availables
 type Options struct {
-	FPS   int
-	Scale int
-	Crop  string
+	FPS     int
+	Scale   int
+	Crop    string
+	Verbose bool
 }
 
 func convertFiles(files []os.FileInfo, inputPath string, outputPath string, opt Options) error {
@@ -23,7 +24,9 @@ func convertFiles(files []os.FileInfo, inputPath string, outputPath string, opt 
 	}
 
 	for _, file := range files {
-		fmt.Println("Converting " + file.Name() + " to " + file.Name() + ".gif")
+		if opt.Verbose == true {
+			fmt.Println("Converting " + file.Name() + " to " + file.Name() + ".gif")
+		}
 		ffmpeg := exec.Command("ffmpeg", "-i", inputPath+"/"+file.Name(), "-vf", "fps="+strconv.Itoa(opt.FPS)+",scale="+strconv.Itoa(opt.Scale)+":-1:flags=lanczos,palettegen", "-y", outputPath+"/"+file.Name()+".png")
 		if err := ffmpeg.Run(); err != nil {
 			return err
@@ -33,14 +36,14 @@ func convertFiles(files []os.FileInfo, inputPath string, outputPath string, opt 
 			return err
 		}
 		if err := os.Remove(inputPath + "/" + file.Name() + ".png"); err != nil {
-			fmt.Println(err)
+			return err
 		}
 	}
 	return nil
 }
 
 // FromFolder convert videos to gif from folder
-func FromFolder(inputPath string, outputPath string, opt Options) {
+func FromFolder(inputPath string, outputPath string, opt Options) error {
 	var files []os.FileInfo
 
 	err := filepath.Walk(inputPath, func(path string, info os.FileInfo, err error) error {
@@ -51,11 +54,14 @@ func FromFolder(inputPath string, outputPath string, opt Options) {
 		return nil
 	})
 	if err != nil {
-		panic(err)
+		return err
 	}
 
-	fmt.Println(inputPath + " -> " + outputPath)
-	if err := convertFiles(files, inputPath, outputPath, opt); err != nil {
-		fmt.Println(err)
+	if opt.Verbose == true {
+		fmt.Println(inputPath + " -> " + outputPath)
 	}
+	if err := convertFiles(files, inputPath, outputPath, opt); err != nil {
+		return err
+	}
+	return nil
 }

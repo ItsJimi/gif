@@ -46,11 +46,16 @@ var convertCmd = &cobra.Command{
 				return
 			}
 
-			convert.FromFolder(inputPath.Name(), outputPath.Name(), convert.Options{
-				FPS:   fps,
-				Scale: scale,
-				Crop:  crop,
+			err = convert.FromFolder(inputPath.Name(), outputPath.Name(), convert.Options{
+				FPS:     fps,
+				Scale:   scale,
+				Crop:    crop,
+				Verbose: true,
 			})
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
 			return
 		}
 
