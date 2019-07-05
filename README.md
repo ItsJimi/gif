@@ -1,4 +1,6 @@
 # gif
+[![godoc](https://godoc.org/github.com/ItsJimi/gif/pkg/convert?status.svg)](https://godoc.org/github.com/ItsJimi/gif/pkg/convert)
+
 🏞 The simplest way to create gif from video
 
 ## Install
