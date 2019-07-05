@@ -13,12 +13,31 @@ go get -u github.com/itsjimi/gif
 ```
 
 ## Usage
+### CLI
+#### Help
 ```shell
 gif help
 ```
-### Convert
+#### Convert
 ```shell
 gif convert --help
+```
+### Code
+#### Convert from folder
+```go
+package main
+
+import "github.com/ItsJimi/gif/pkg/convert"
+
+func main() {
+  options := convert.Options{
+    FPS:   30,
+    Scale: -1,
+    Crop:  "",
+  }
+
+  convert.FromFolder("./videos", "./gifs", options)
+}
 ```
 
 ## Contribute
