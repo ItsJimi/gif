@@ -17,7 +17,7 @@ type Options struct {
 	Verbose bool
 }
 
-func convertFiles(files []os.FileInfo, inputPath string, outputPath string, opt Options) error {
+func ConvertFiles(files []os.FileInfo, inputPath string, outputPath string, opt Options) error {
 	cropFlag := ""
 	if opt.Crop != "" {
 		cropFlag = ",crop="
