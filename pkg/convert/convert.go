@@ -17,7 +17,7 @@ type Options struct {
 	Verbose bool
 }
 
-func convertFiles(files []os.FileInfo, inputPath string, outputPath string, opt Options) error {
+func ConvertFiles(files []os.FileInfo, inputPath string, outputPath string, opt Options) error {
 	cropFlag := ""
 	if opt.Crop != "" {
 		cropFlag = ",crop="
@@ -60,7 +60,7 @@ func FromFolder(inputPath string, outputPath string, opt Options) error {
 	if opt.Verbose == true {
 		fmt.Println(inputPath + " -> " + outputPath)
 	}
-	if err := convertFiles(files, inputPath, outputPath, opt); err != nil {
+	if err := ConvertFiles(files, inputPath, outputPath, opt); err != nil {
 		return err
 	}
 	return nil
