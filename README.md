@@ -11,7 +11,7 @@ Use precompiled versions in [releases page](https://github.com/ItsJimi/gif/relea
 or
 
 ```shell
-go get -u github.com/itsjimi/gif
+go get -u github.com/ItsJimi/gif
 ```
 
 ## Usage
