@@ -6,9 +6,17 @@
 ## Install
 Install [ffmpeg](https://ffmpeg.org/) before running `gif`.
 
+### CLI
+
 Use precompiled versions in [releases page](https://github.com/ItsJimi/gif/releases)
 
 or
+
+```shell
+go install github.com/ItsJimi/gif@latest
+```
+
+### Code
 
 ```shell
 go get -u github.com/ItsJimi/gif
